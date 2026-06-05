@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: taskmanager-api
+    runtime: python
+    region: ohio
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 10000
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///./taskmanager.db
+      - key: JWT_SECRET_KEY
+        value: taskmanager-super-secret-key-change-in-production-2026
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRATION_HOURS
+        value: "24"
